@@ -1,0 +1,124 @@
+/* Set the background color for the entire page */
+body {
+    background-color: #FBEEC1; /* Light yellow color */
+    color: #8D8741; /* Olive Green text color */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Style the form and result div */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px; /* Font size adjustment */
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #659DBD; /* Light Blue container background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+.result-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style the result sections (comment and email) */
+.comment-section,
+.email-section {
+    flex: 1;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #DAAD86; /* Tan color for result sections */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+.result-section h2 {
+    margin: 10px 0;
+}
+
+.result-section p {
+    margin: 15px 0;
+}
+
+/* Style the language selection dropdown */
+.language-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.language-label {
+    font-size: 18px; /* Font size adjustment */
+    margin-right: 10px;
+    color: #8D8741; /* Olive Green color */
+}
+
+.language-box {
+    width: 150px; /* Adjust the width for the language box */
+}
+
+.language-select {
+    font-size: 18px;
+    width: 100%;
+    padding: 10px;
+    background-color: #DAAD86; /* Tan color for dropdown */
+    border: none;
+    color: #8D8741; /* Olive Green color */
+    font-weight: bolder;
+}
+
+/* Style the title */
+h1 {
+    font-size: 36px; /* Larger font size */
+    margin: 0;
+    text-align: center;
+    color: #8D8741; /* Olive Green color */
+}
+
+/* Style the submit button */
+.submit-button {
+    background-color: #BC986A; /* Darker brown for button */
+    color: #FBEEC1; /* Light yellow text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px; /* Font size adjustment */
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Style the submit button on hover */
+.submit-button:hover {
+    background-color: #8D8741; /* Olive Green on hover */
+}
+
+/* Style the translation button */
+.translate-options {
+    display: flex;
+    flex-direction: row; /* Align options horizontally */
+    margin-top: 10px;
+}
+
+.translate-label {
+    font-size: 16px; /* Font size adjustment */
+    margin-right: 10px;
+}
+
+.translate-checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+
+
+

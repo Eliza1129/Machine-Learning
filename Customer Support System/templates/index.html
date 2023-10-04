@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment and Email Generator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Email to Customer</h1>
+        <form method="POST">
+            <div class="language-section">
+                <label for="language" class="language-label">Select Language:</label>
+                <div class="language-box">
+                    <select id="language" name="language" class="language-select">
+                        <option value="English">English</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Korean">Korean</option>
+                        <option value="French">French</option>
+                        <!-- Add more language options as needed -->
+                    </select>
+                </div>
+            </div>
+            <div class="translate-options">
+                <label for="translate-comment">Translate Comment:</label>
+                <input type="checkbox" name="translate-comment" id="translate-comment" class="translate-checkbox">
+                <label for="translate-email">Translate Email:</label>
+                <input type="checkbox" name="translate-email" id="translate-email" class="translate-checkbox">
+            </div>
+            <input type="submit" value="Generate" class="submit-button">
+        </form>
+        <div class="result-container">
+            {% if comment %}
+            <div class="result-section comment-section">
+                <h2>Comment:</h2>
+                <p>{{ comment }}</p>
+            </div>
+            <div class="result-section email-section">
+                <h2>Email:</h2>
+                <div class="email-content">
+                    {{ email | safe }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
