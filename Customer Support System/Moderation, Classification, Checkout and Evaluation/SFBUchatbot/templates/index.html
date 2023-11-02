@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFBU Customer Support System- text</title>
+    <style>
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SFBU Customer Support System</h1>
+    </header>
+    <form method="POST" action="/submit_question">
+        <input type="text" name="question" placeholder="Ask a question">
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Add a "Start New Chat" button -->
+    <form method="POST" action="/start_new_chat">
+        <button type="submit">Start New Chat</button>
+    </form>
+    <div>
+        <h2>Reply:</h2>
+        <ul>
+            {% for question, reply in replies.items() %}
+            <li><strong>{{ question }}</strong>: {{ reply }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
