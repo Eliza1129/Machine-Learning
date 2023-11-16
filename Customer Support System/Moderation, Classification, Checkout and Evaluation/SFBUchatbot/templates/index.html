@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>SFBU Customer Support System</h1>
@@ -23,12 +25,88 @@
         <button type="submit">Start New Chat</button>
     </form>
     <div>
-        <h2>Reply:</h2>
+        <h2>Replies:</h2>
         <ul>
             {% for question, reply in replies.items() %}
             <li><strong>{{ question }}</strong>: {{ reply }}</li>
             {% endfor %}
         </ul>
     </div>
+
+    <div>
+        <h2>Record a Question:</h2>
+        <button id="recordButton">Record</button>
+        <button id="stopButton" disabled>Stop</button>
+    </div>
+
+    <div>
+        <h2>Replies:</h2>
+        <ul>
+            {% for question, reply in replies.items() %}
+            <li><strong>{{ question }}</strong>: {{ reply }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <audio id="audioPlayer" controls hidden></audio>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+
+        document.getElementById("recordButton").addEventListener("click", function () {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+
+                    mediaRecorder.addEventListener("dataavailable", event => {
+                        audioChunks.push(event.data);
+                    });
+
+                    document.getElementById("stopButton").disabled = false;
+                    document.getElementById("recordButton").disabled = true;
+                });
+        });
+
+        document.getElementById("stopButton").addEventListener("click", function () {
+            mediaRecorder.stop();
+
+            mediaRecorder.addEventListener("stop", () => {
+                const audioBlob = new Blob(audioChunks);
+                const formData = new FormData();
+                formData.append("audio", audioBlob);
+
+                fetch('/upload-audio', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update replies list
+                        const repliesList = document.querySelector('ul');
+                        repliesList.innerHTML = ''; // Clear current list
+                        for (const [question, reply] of Object.entries(data.replies)) {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `<strong>${question}</strong>: ${reply}`;
+                            repliesList.appendChild(listItem);
+                        }
+
+                        // Set up and play the audio
+                        const audioPlayer = document.getElementById('audioPlayer');
+                        audioPlayer.src = data.encoded_mp3;
+                        audioPlayer.hidden = false; // Show the player
+                        audioPlayer.play();
+                    })
+                    .catch(error => console.error('Error:', error));
+
+                audioChunks = [];
+                document.getElementById("recordButton").disabled = false;
+                document.getElementById("stopButton").disabled = true;
+            });
+        });
+    </script>
+
 </body>
+
 </html>
